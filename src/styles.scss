@@ -1,0 +1,224 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Toss Product Sans OTF';
+}
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.screenBG {
+  position: absolute;
+  z-index: -1;
+}
+
+.bsAll {
+  width: 100vw;
+  height: 100vh;
+}
+
+.dim {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0.4;
+}
+
+.bottomSheet {
+  width: 100%;
+  height: 100%;
+  background: black;
+  border-radius: 30px 30px 0 0;
+  display: flex;
+  justify-content: center;
+  padding-top: 88px;
+}
+
+.sampleUI {
+  width: calc(100% - 32px);
+  height: 50vh;
+  background: #020913E8;
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 75%);
+
+  img {
+    width: calc(100% - 32px);
+    margin: 16px;
+  }
+}
+
+.cta {
+  background: #3182f6FF;
+  width: calc(100% - 48px);
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  position: absolute;
+  bottom: 35px;
+  left: 24px;
+  cursor: pointer;
+}
+
+.visualWrapper {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  bottom: 0;
+}
+
+.visual {
+  --rotateY: 0deg;
+  --rotateX: 0deg;
+  --rotate: 0deg;
+  --x: 50px;
+  --y: -160px;
+  --z: 0px;
+  position: absolute;
+  // position: relative;
+  bottom: 0;
+  perspective: 1500px;
+  transform-style: preserve-3d;
+  transform: rotateY(var(--rotateY)) rotateX(var(--rotateX))
+  rotateZ(var(--rotate)) translate3d(var(--x), var(--y), var(--z));
+}
+
+.gradientDim {
+  position: absolute;
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(180deg, transparent 0%, black 100%);
+
+  &.top {
+    top: 0;
+  }
+  &.bottom {
+    bottom: 0;
+  }
+}
+
+.chip {
+  // $background-color: var(--background-color);
+  position: relative;
+  width: 260px;
+  height: 80px;
+  // background: orange;
+  background: #ffdd7830;
+  border-radius: 14px;
+  box-shadow: inset 0 0 30px #faa131, 0 0 20px #ffd15880, rgba(0, 0, 0, 0.5) -20px 30px 55px;
+  transform-style: preserve-3d;
+
+  // box-shadow: inset 0 0 30px #00f;
+}
+
+.chipHeight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: inherit;
+  
+
+  transform: translateZ(-3px);
+
+  &:nth-child(2) {
+    transform: translateZ(-6px);
+  }
+  &:nth-child(3) {
+    transform: translateZ(-8px);
+  }
+}
+
+.chip.round {
+  border-radius: 100px;
+
+  .chipHeight {
+    border-radius: 100px;
+  }
+}
+
+.chip.arrow {
+  // border-radius: 14px 0 0 14px;
+  height: 70px;
+  width: 230px;
+}
+
+// .chip.arrow:after {
+//   content: '';
+//   position: absolute;
+//   width: 0;
+//   height: 0;
+//   border-top: 40px solid transparent;
+//   border-bottom: 40px solid transparent;
+//   border-left: 30px solid orange;
+//   right: -30px;
+//   box-shadow: inset 0 0 100px #ffd158, rgba(0, 0, 0, 0.5) -20px 30px 55px;
+
+// }
+
+.chip.first {
+  --rotate: 0deg;
+  --rotateY: 0deg;
+  --rotateX: 0deg;
+  --x: 0px;
+  --y: 20px;
+  --z: 20px;
+  --rotate3d: 1, 1, 1, 20deg;
+
+  width: 140px;
+  transform: rotate3d(var(--rotate3d)) translateZ(var(--z)) translateX(var(--x)) translateY(var(--y)) rotate(var(--rotate)) rotateY(var(--rotateY)) rotateX(var(--rotateX));
+  // transform: scale(0.8);
+  // background: #fe9800cc;
+}
+.chip.second {
+  --rotate: 0deg;
+  --rotateY: 0deg;
+  --rotateX: 0deg;
+  --x: 0px;
+  --y: 0px;
+  --z: -10px;
+  --rotate3d: 1, 1, 1, 350deg;
+  transform: rotate3d(var(--rotate3d)) translateZ(var(--z)) translateX(var(--x)) translateY(var(--y)) rotate(var(--rotate)) rotateY(var(--rotateY)) rotateX(var(--rotateX));
+
+}
+.chip.third {
+  --rotate: 0deg;
+  --rotateY: 0deg;
+  --rotateX: 0deg;
+  --x: 130px;
+  --y: 30px;
+  --z: 20px;
+  --rotate3d: 1, 1, 1, 10deg;
+
+  width: 140px;
+  transform: rotate3d(var(--rotate3d)) translateZ(var(--z)) translateX(var(--x)) translateY(var(--y)) rotate(var(--rotate)) rotateY(var(--rotateY)) rotateX(var(--rotateX));
+}
+.chip.fourth {
+  --rotate: 0deg;
+  --rotateY: 0deg;
+  --rotateX: 0deg;
+  --x: 30px;
+  --y: 0px;
+  --z: 0px;
+  --rotate3d: 1, 1, 1, 35deg;
+
+  width: 200px;
+  transform: rotate3d(var(--rotate3d)) translateZ(var(--z)) translateX(var(--x)) translateY(var(--y)) rotate(var(--rotate)) rotateY(var(--rotateY)) rotateX(var(--rotateX));
+}

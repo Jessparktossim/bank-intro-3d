@@ -2,6 +2,9 @@ import { useState } from "react";
 import "./styles.scss";
 import bg from "../assets/home.png";
 import sample from "../assets/sample.png";
+import sampleBG from "../assets/sampleBG.png";
+import sampleStack from "../assets/sampleStack.png";
+import sampleTb from "../assets/sampleTossbank.png";
 import { motion, MotionConfig } from "framer-motion";
 
 const easeEasing = {
@@ -47,15 +50,33 @@ const largeSpring = {
 
 const bottomSheetVariants = {
   initial: {
+    background: "#000",
     y: "100%"
   },
   index: {
+    background: "#000",
     y: "50%",
     borderRadius: "30px 30px 0 0"
   },
   first: {
+    background: "#000",
     y: "0%",
     borderRadius: "0px 0px 0 0"
+  },
+  last: {
+    background: "#fff",
+    y: "50%",
+    borderRadius: "30px 30px 0 0",
+    "--mask-alpha": 0
+  }
+};
+
+const dimVariants = {
+  show: {
+    opacity: 0.5
+  },
+  hide: {
+    opacity: 0
   }
 };
 
@@ -89,6 +110,22 @@ const sampleVariants = {
       ...outEasing,
       delay: 0.2
     }
+  },
+  second: {
+    opacity: 1,
+    y: 0
+  },
+  third: {
+    opacity: 0,
+    y: -100
+  },
+  fourth: {
+    opacity: 0,
+    y: -100
+  },
+  last: {
+    opacity: 0,
+    y: 50
   }
 };
 
@@ -102,6 +139,22 @@ const visualVariants = {
   first: {
     "--y": "-160px"
     // opacity: 1
+  },
+  second: {
+    "--y": "-160px",
+    "--rotateY": "-80deg"
+  },
+  third: {
+    "--y": "-460px",
+    "--rotateY": "-160deg"
+  },
+  fourth: {
+    "--y": "-460px",
+    "--rotateY": "-360deg"
+  },
+  last: {
+    "--y": "-160px",
+    "--rotateY": "-100deg"
   }
   // first: {
   //   "--x": "20px"
@@ -133,8 +186,40 @@ const firstVariants = {
     "--rotate": "0deg"
   },
   second: {
-    opacity: 0.2
-    // "--rotate3d": "1, 1, 0, 30deg"
+    opacity: 0.2,
+    "--x": "-190px",
+    "--y": "120px",
+    "--z": "110px",
+    "--rotateX": "10deg",
+    "--rotateY": "-30deg",
+    "--rotate": "0deg"
+  },
+  third: {
+    opacity: 0.2,
+    "--x": "-240px",
+    "--y": "230px",
+    "--z": "110px",
+    "--rotateX": "40deg",
+    "--rotateY": "10deg",
+    "--rotate": "0deg"
+  },
+  fourth: {
+    opacity: 0.2,
+    "--x": "140px",
+    "--y": "100px",
+    "--z": "-220px",
+    "--rotateX": "30deg",
+    "--rotateY": "60deg",
+    "--rotate": "20deg"
+  },
+  last: {
+    opacity: 0,
+    "--x": "140px",
+    "--y": "100px",
+    "--z": "-220px",
+    "--rotateX": "30deg",
+    "--rotateY": "60deg",
+    "--rotate": "20deg"
   }
 };
 
@@ -157,7 +242,36 @@ const secondVariants = {
     "--z": "-160px"
   },
   second: {
-    opacity: 0.2
+    opacity: 0.2,
+    "--y": "20px",
+    "--rotate": "-10deg",
+    "--rotateX": "-20deg",
+    "--rotateY": "20deg",
+    "--z": "-160px"
+  },
+  third: {
+    opacity: 1,
+    "--y": "20px",
+    "--rotate": "-10deg",
+    "--rotateX": "-20deg",
+    "--rotateY": "20deg",
+    "--z": "-160px"
+  },
+  fourth: {
+    opacity: 0.15,
+    "--y": "20px",
+    "--rotate": "-10deg",
+    "--rotateX": "-20deg",
+    "--rotateY": "20deg",
+    "--z": "-160px"
+  },
+  last: {
+    opacity: 0,
+    "--y": "20px",
+    "--rotate": "-10deg",
+    "--rotateX": "-20deg",
+    "--rotateY": "20deg",
+    "--z": "-160px"
   }
 };
 
@@ -178,7 +292,36 @@ const thirdVariants = {
     "--z": "100px"
   },
   second: {
-    opacity: 0.1
+    opacity: 1,
+    "--x": "100px",
+    "--y": "-40px",
+    "--rotateX": "-10deg",
+    "--rotateY": "70deg",
+    "--z": "100px"
+  },
+  third: {
+    opacity: 0.2,
+    "--x": "100px",
+    "--y": "-40px",
+    "--rotateX": "-10deg",
+    "--rotateY": "90deg",
+    "--z": "100px"
+  },
+  fourth: {
+    opacity: 0.25,
+    "--x": "-170px",
+    "--y": "-40px",
+    "--rotateX": "-20deg",
+    "--rotateY": "120deg",
+    "--z": "100px"
+  },
+  last: {
+    opacity: 0,
+    "--x": "-170px",
+    "--y": "-40px",
+    "--rotateX": "-20deg",
+    "--rotateY": "120deg",
+    "--z": "100px"
   }
 };
 
@@ -202,7 +345,70 @@ const fourthVariants = {
     "--rotateY": "-30deg"
   },
   second: {
-    opacity: 0.15
+    opacity: 0.15,
+    "--z": "0px",
+    "--x": "-10px",
+    "--y": "-20px",
+    "--rotate": "20deg",
+    "--rotateX": "-50deg",
+    "--rotateY": "-30deg"
+  },
+  third: {
+    opacity: 0.1,
+    "--z": "-190px",
+    "--x": "80px",
+    "--y": "150px",
+    "--rotate": "-20deg",
+    "--rotateX": "-30deg",
+    "--rotateY": "20deg"
+  },
+  fourth: {
+    opacity: 1,
+    "--z": "-190px",
+    "--x": "80px",
+    "--y": "-10px",
+    "--rotate": "-20deg",
+    "--rotateX": "-30deg",
+    "--rotateY": "20deg"
+  },
+  last: {
+    opacity: 0,
+    "--z": "-190px",
+    "--x": "80px",
+    "--y": "-10px",
+    "--rotate": "-20deg",
+    "--rotateX": "-30deg",
+    "--rotateY": "20deg"
+  }
+};
+
+const stackVariants = {
+  up: {
+    y: 0
+  },
+  down: {
+    y: 80,
+    transition: {
+      ...expoEasing,
+      delay: 0.4,
+      duration: 1.4
+    }
+  }
+};
+
+const tbVariants = {
+  hide: {
+    opacity: 0,
+    x: -10
+  },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      ...expoEasing,
+      delay: 0.6,
+      duration: 1.4
+    }
   }
 };
 
@@ -232,16 +438,24 @@ function Cta(props) {
 
 export default function App() {
   const [state, setState] = useState("index");
-  const states = ["index", "first", "second", "third", "fourth", "fifth"];
+  const states = ["index", "first", "second", "third", "fourth", "last"];
 
   function onCtaTap(event, info) {
     let index = states.indexOf(state);
-    setState(states[index + 1]);
+    if (index === states.length - 1) {
+      setState(states[0]);
+    } else {
+      setState(states[index + 1]);
+    }
   }
 
   function onSheetTap(event, info) {
     let index = states.indexOf(state);
-    setState(states[index - 1]);
+    if (index === 0) {
+      setState(states[state.length]);
+    } else {
+      setState(states[index - 1]);
+    }
   }
 
   return (
@@ -249,17 +463,46 @@ export default function App() {
       <MotionConfig
         transition={{ type: "spring", stiffness: 200, damping: 30 }}
       >
-        <img className="screenBG" width="100%" alt="screenBG" src={bg} />
+        {/* <motion.div className="screen"> */}
+        <img className="screenBG" width="100%" alt="screenBG" src={sampleBG} />
+        <motion.div
+          className="tb"
+          variants={tbVariants}
+          initial={false}
+          animate={state === "last" ? "show" : "hide"}
+        >
+          <img className="tb" width="100%" alt="tb" src={sampleTb} />
+        </motion.div>
+        <motion.div
+          className="stack"
+          variants={stackVariants}
+          initial={false}
+          animate={state === "last" ? "down" : "up"}
+        >
+          <img className="stack" width="100%" alt="stack" src={sampleStack} />
+        </motion.div>
+
+        {/* </motion.div> */}
         <motion.div className="bsAll">
-          <motion.div className="dim" />
+          <motion.div
+            className="dim"
+            variants={dimVariants}
+            animate={state === "last" ? "hide" : "show"}
+          />
           <motion.div
             className="bottomSheet"
             variants={bottomSheetVariants}
             initial={"initial"}
-            animate={state === "index" ? "index" : "first"}
+            animate={
+              state === "index" ? "index" : state === "last" ? "last" : "first"
+            }
             onTap={onSheetTap}
           >
-            <motion.div className="sampleUI" variants={sampleVariants}>
+            <motion.div
+              className="sampleUI"
+              variants={sampleVariants}
+              animate={state}
+            >
               <img width="100%" alt="sampleUI" src={sample} />
             </motion.div>
             {/* <motion.div
@@ -276,7 +519,7 @@ export default function App() {
             </motion.div> */}
           </motion.div>
           <motion.div className="visualWrapper">
-            <motion.div className="gradientDim top" />
+            {/* <motion.div className="gradientDim top" /> */}
             <motion.div
               className="visual"
               variants={visualVariants}
@@ -294,14 +537,20 @@ export default function App() {
               <Chip className="arrow third" variants={thirdVariants} />
               <Chip className="square fourth" variants={fourthVariants} />
             </motion.div>
-            <motion.div className="gradientDim bottom" />
+            {/* <motion.div className="gradientDim bottom" /> */}
           </motion.div>
           <Cta
             onTap={onCtaTap}
             variants={ctaVariants}
             initial={"initial"}
             animate={"index"}
-            text={state === "index" ? "어떻게 좋아졌을까?" : "다음"}
+            text={
+              state === "index"
+                ? "어떻게 좋아졌을까?"
+                : state === "last"
+                ? "시작하기"
+                : "다음"
+            }
           />
         </motion.div>
       </MotionConfig>

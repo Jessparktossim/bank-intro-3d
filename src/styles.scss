@@ -180,10 +180,11 @@ html, body, #root {
   --x: 0px;
   --y: 20px;
   --z: 20px;
-  --rotate3d: 1, 1, 1, 20deg;
+  // --rotate3d: 1, 1, 1, 20deg;
 
   width: 140px;
-  transform: rotate3d(var(--rotate3d)) translateZ(var(--z)) translateX(var(--x)) translateY(var(--y)) rotate(var(--rotate)) rotateY(var(--rotateY)) rotateX(var(--rotateX));
+  transform: rotateY(var(--rotateY)) rotateX(var(--rotateX))
+    rotateZ(var(--rotate)) translate3d(var(--x), var(--y), var(--z));
   // transform: scale(0.8);
   // background: #fe9800cc;
 }
@@ -194,8 +195,9 @@ html, body, #root {
   --x: 0px;
   --y: 0px;
   --z: -10px;
-  --rotate3d: 1, 1, 1, 350deg;
-  transform: rotate3d(var(--rotate3d)) translateZ(var(--z)) translateX(var(--x)) translateY(var(--y)) rotate(var(--rotate)) rotateY(var(--rotateY)) rotateX(var(--rotateX));
+  // --rotate3d: 1, 1, 1, 350deg;
+  transform: rotateY(var(--rotateY)) rotateX(var(--rotateX))
+    rotateZ(var(--rotate)) translate3d(var(--x), var(--y), var(--z));
 
 }
 .chip.third {
@@ -205,10 +207,11 @@ html, body, #root {
   --x: 130px;
   --y: 30px;
   --z: 20px;
-  --rotate3d: 1, 1, 1, 10deg;
+  // --rotate3d: 1, 1, 1, 10deg;
 
   width: 140px;
-  transform: rotate3d(var(--rotate3d)) translateZ(var(--z)) translateX(var(--x)) translateY(var(--y)) rotate(var(--rotate)) rotateY(var(--rotateY)) rotateX(var(--rotateX));
+  transform: rotateY(var(--rotateY)) rotateX(var(--rotateX))
+    rotateZ(var(--rotate)) translate3d(var(--x), var(--y), var(--z));
 }
 .chip.fourth {
   --rotate: 0deg;
@@ -217,8 +220,9 @@ html, body, #root {
   --x: 30px;
   --y: 0px;
   --z: 0px;
-  --rotate3d: 1, 1, 1, 35deg;
+  // --rotate3d: 1, 1, 1, 35deg;
 
   width: 200px;
-  transform: rotate3d(var(--rotate3d)) translateZ(var(--z)) translateX(var(--x)) translateY(var(--y)) rotate(var(--rotate)) rotateY(var(--rotateY)) rotateX(var(--rotateX));
+  transform: rotateY(var(--rotateY)) rotateX(var(--rotateX))
+    rotateZ(var(--rotate)) translate3d(var(--x), var(--y), var(--z));
 }

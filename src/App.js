@@ -100,45 +100,41 @@ const visualVariants = {
     "--y": "-160px"
   },
   first: {
-    "--x": "20px"
-    // "--rotateX": "55deg",
-    // "--rotateY": "-15deg"
-  },
-  second: {
-    // "--rotateY": "-90deg",
-    // "--rotate": "60deg"
+    "--y": "-160px"
+    // opacity: 1
   }
+  // first: {
+  //   "--x": "20px"
+  //   // "--rotateX": "55deg",
+  //   // "--rotateY": "-15deg"
+  // },
 };
 
 const firstVariants = {
   initial: {
-    "--rotate": "30deg",
+    "--rotate": "0deg",
     "--y": "50px"
   },
   index: {
-    "--rotate": "0deg",
-    "--y": "20px",
-    transition: {
-      ...backEasing,
-      delay: 0.2,
-      duration: 0.5
-    }
+    "--rotate": "20deg",
+    "--rotateY": "-10deg",
+    "--y": "20px"
+    // transition: {
+    //   ...backEasing,
+    //   delay: 0.2,
+    //   duration: 0.5
+    // }
   },
   first: {
-    "--x": "60px",
-    "--y": "50px",
-    "--z": "140px",
-    "--rotateX": "360deg",
-    "--rotate": "0deg",
-    "--rotate3d": "1, 1, 0, 30deg"
+    "--y": "120px",
+    "--z": "110px",
+    "--rotateX": "10deg",
+    "--rotateY": "30deg",
+    "--rotate": "0deg"
   },
   second: {
-    "--x": "60px",
-    "--y": "50px",
-    "--z": "140px",
-    "--rotateX": "360deg",
-    "--rotate": "0deg",
-    "--rotate3d": "1, 1, 0, 30deg"
+    opacity: 0.2
+    // "--rotate3d": "1, 1, 0, 30deg"
   }
 };
 
@@ -147,23 +143,21 @@ const secondVariants = {
     "--y": "20px"
   },
   index: {
-    "--y": "0px"
+    "--y": "0px",
+    "--rotate": "-5deg",
+    "--rotateX": "20deg",
+    "--rotateY": "10deg"
   },
   first: {
-    opacity: 0.2,
-    // "--x": "-50px",
-    "--y": "-200px",
-    "--z": "-100px",
-    "--rotateX": "20deg",
-    "--rotateY": "-20deg"
+    opacity: 0.25,
+    "--y": "20px",
+    "--rotate": "-10deg",
+    "--rotateX": "-20deg",
+    "--rotateY": "20deg",
+    "--z": "-160px"
   },
   second: {
-    opacity: 0.2,
-    // "--x": "-50px",
-    "--y": "-200px",
-    "--z": "-100px",
-    "--rotateX": "20deg",
-    "--rotateY": "-20deg"
+    opacity: 0.2
   }
 };
 
@@ -172,25 +166,19 @@ const thirdVariants = {
     "--y": "80px"
   },
   index: {
-    "--y": "30px"
+    "--y": "30px",
+    "--rotateX": "20deg",
+    "--rotateY": "20deg"
   },
   first: {
     opacity: 0.1,
-    "--rotateX": "-20deg",
-    "--rotateY": "20deg",
-    "--rotate3d": "1, 1, 1, 10deg",
-    "--x": "200px",
-    "--y": "-250px",
-    "--z": "-150px"
+    "--y": "50px",
+    "--rotateX": "30deg",
+    "--rotateY": "50deg",
+    "--z": "100px"
   },
   second: {
-    opacity: 0.1,
-    "--rotateX": "-20deg",
-    "--rotateY": "20deg",
-    "--rotate3d": "1, 1, 1, 10deg",
-    "--x": "200px",
-    "--y": "-250px",
-    "--z": "-150px"
+    opacity: 0.1
   }
 };
 
@@ -199,21 +187,22 @@ const fourthVariants = {
     "--y": "30px"
   },
   index: {
-    "--y": "0px"
+    "--y": "0px",
+    "--rotate": "20deg",
+    "--rotateX": "20deg",
+    "--rotateY": "-10deg"
   },
   first: {
-    opacity: 0.15,
-    "--y": "-130px",
-    "--z": "-50px",
-    "--rotateY": "10deg",
-    "--rotateX": "30deg"
+    opacity: 0.2,
+    "--z": "0px",
+    "--x": "-10px",
+    "--y": "-20px",
+    "--rotate": "20deg",
+    "--rotateX": "-50deg",
+    "--rotateY": "-30deg"
   },
   second: {
-    opacity: 0.15,
-    "--y": "-130px",
-    "--z": "-50px",
-    "--rotateY": "10deg",
-    "--rotateX": "30deg"
+    opacity: 0.15
   }
 };
 
@@ -293,6 +282,7 @@ export default function App() {
               variants={visualVariants}
               initial={"initial"}
               animate={state}
+              // animate="index"
               transition={{
                 ...expoEasing,
                 duration: 1.5

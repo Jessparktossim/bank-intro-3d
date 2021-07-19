@@ -67,7 +67,7 @@ const bottomSheetVariants = {
     background: "#fff",
     y: "50%",
     borderRadius: "30px 30px 0 0",
-    "--mask-alpha": 0
+    "--mask-alpha": "0"
   }
 };
 
@@ -92,6 +92,15 @@ const ctaVariants = {
       delay: 0.2,
       ...basicSpring
     }
+  }
+};
+
+const gradientDimVariants = {
+  show: {
+    opacity: 1
+  },
+  hide: {
+    opacity: 0
   }
 };
 
@@ -537,7 +546,11 @@ export default function App() {
               <Chip className="arrow third" variants={thirdVariants} />
               <Chip className="square fourth" variants={fourthVariants} />
             </motion.div>
-            {/* <motion.div className="gradientDim bottom" /> */}
+            <motion.div
+              className="gradientDim bottom"
+              variants={gradientDimVariants}
+              animate={state === "index" ? "show" : "hide"}
+            />
           </motion.div>
           <Cta
             onTap={onCtaTap}
@@ -546,7 +559,7 @@ export default function App() {
             animate={"index"}
             text={
               state === "index"
-                ? "어떻게 좋아졌을까?"
+                ? "어떻게 다를까?"
                 : state === "last"
                 ? "시작하기"
                 : "다음"

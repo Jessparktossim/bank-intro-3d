@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./styles.scss";
 import bg from "../assets/home.png";
 import sample from "../assets/sample.png";
@@ -6,6 +6,9 @@ import sampleBG from "../assets/sampleBG.png";
 import sampleStack from "../assets/sampleStack.png";
 import sampleTb from "../assets/sampleTossbank.png";
 import { motion, MotionConfig } from "framer-motion";
+import Splitting from "splitting";
+import "splitting/dist/splitting.css";
+import "splitting/dist/splitting-cells.css";
 
 const easeEasing = {
   type: "tween",
@@ -46,6 +49,13 @@ const largeSpring = {
   type: "spring",
   stiffness: 100,
   damping: 10
+};
+const flowSpring = {
+  type: "spring",
+  stiffness: 120,
+  damping: 30
+  // stiffness: 12,
+  // damping: 4
 };
 
 const bottomSheetVariants = {
@@ -117,7 +127,8 @@ const sampleVariants = {
     y: 0,
     transition: {
       ...outEasing,
-      delay: 0.2
+      delay: 0.4
+      // delay: 0.2
     }
   },
   second: {
@@ -150,26 +161,26 @@ const visualVariants = {
     // opacity: 1
   },
   second: {
-    "--y": "-160px",
-    "--rotateY": "-80deg"
+    "--y": "-160px"
+    // "--rotateY": "-80deg"
   },
   third: {
-    "--y": "-460px",
-    "--rotateY": "-160deg"
+    "--y": "-160px"
+    // "--y": "-460px",
+    // transition: {
+    //   delay: 0.15,
+    //   ...flowSpring
+    // }
+    // "--rotateY": "-160deg"
   },
   fourth: {
-    "--y": "-460px",
-    "--rotateY": "-360deg"
+    "--y": "-160px"
+    // "--rotateY": "-360deg"
   },
   last: {
-    "--y": "-160px",
-    "--rotateY": "-100deg"
+    "--y": "-160px"
+    // "--rotateY": "-100deg"
   }
-  // first: {
-  //   "--x": "20px"
-  //   // "--rotateX": "55deg",
-  //   // "--rotateY": "-15deg"
-  // },
 };
 
 const firstVariants = {
@@ -188,100 +199,177 @@ const firstVariants = {
     // }
   },
   first: {
-    "--y": "120px",
-    "--z": "110px",
-    "--rotateX": "10deg",
-    "--rotateY": "30deg",
-    "--rotate": "0deg"
+    opacity: 0,
+    "--rotate": "20deg",
+    "--rotateX": "80deg",
+    "--rotateY": "10deg",
+    "--y": "20px",
+    transition: {
+      ...flowSpring
+    }
+    // "--y": "120px",
+    // "--z": "110px",
+    // "--rotateX": "10deg",
+    // "--rotateY": "30deg",
+    // "--rotate": "0deg"
   },
   second: {
-    opacity: 0.2,
-    "--x": "-190px",
-    "--y": "120px",
-    "--z": "110px",
-    "--rotateX": "10deg",
-    "--rotateY": "-30deg",
-    "--rotate": "0deg"
+    opacity: 0,
+    "--rotate": "20deg",
+    "--rotateX": "80deg",
+    "--rotateY": "10deg",
+    "--y": "20px"
   },
   third: {
-    opacity: 0.2,
-    "--x": "-240px",
-    "--y": "230px",
-    "--z": "110px",
-    "--rotateX": "40deg",
+    opacity: 0,
+    "--rotate": "20deg",
+    "--rotateX": "80deg",
     "--rotateY": "10deg",
-    "--rotate": "0deg"
+    "--y": "20px"
   },
   fourth: {
-    opacity: 0.2,
-    "--x": "140px",
-    "--y": "100px",
-    "--z": "-220px",
-    "--rotateX": "30deg",
-    "--rotateY": "60deg",
-    "--rotate": "20deg"
+    opacity: 0,
+    "--rotate": "20deg",
+    "--rotateX": "80deg",
+    "--rotateY": "10deg",
+    "--y": "20px"
   },
   last: {
     opacity: 0,
-    "--x": "140px",
-    "--y": "100px",
-    "--z": "-220px",
-    "--rotateX": "30deg",
-    "--rotateY": "60deg",
-    "--rotate": "20deg"
+    "--rotate": "20deg",
+    "--rotateX": "80deg",
+    "--rotateY": "10deg",
+    "--y": "20px"
   }
+  // second: {
+  //   opacity: 0.2,
+  //   "--x": "-190px",
+  //   "--y": "120px",
+  //   "--z": "110px",
+  //   "--rotateX": "10deg",
+  //   "--rotateY": "-30deg",
+  //   "--rotate": "0deg"
+  // },
+  // third: {
+  //   opacity: 0.2,
+  //   "--x": "-240px",
+  //   "--y": "230px",
+  //   "--z": "110px",
+  //   "--rotateX": "40deg",
+  //   "--rotateY": "10deg",
+  //   "--rotate": "0deg"
+  // },
+  // fourth: {
+  //   opacity: 0.2,
+  //   "--x": "140px",
+  //   "--y": "100px",
+  //   "--z": "-220px",
+  //   "--rotateX": "30deg",
+  //   "--rotateY": "60deg",
+  //   "--rotate": "20deg"
+  // },
+  // last: {
+  //   opacity: 0,
+  //   "--x": "140px",
+  //   "--y": "100px",
+  //   "--z": "-220px",
+  //   "--rotateX": "30deg",
+  //   "--rotateY": "60deg",
+  //   "--rotate": "20deg"
+  // }
 };
 
 const secondVariants = {
   initial: {
-    "--y": "20px"
+    "--y": "50px"
   },
   index: {
-    "--y": "0px",
+    "--y": "30px",
     "--rotate": "-5deg",
     "--rotateX": "20deg",
     "--rotateY": "10deg"
   },
   first: {
-    opacity: 0.25,
-    "--y": "20px",
-    "--rotate": "-10deg",
-    "--rotateX": "-20deg",
-    "--rotateY": "20deg",
-    "--z": "-160px"
+    opacity: 0.3,
+    "--y": "-80px",
+    "--rotate": "-5deg",
+    "--rotateX": "30deg",
+    "--rotateY": "10deg",
+    transition: {
+      delay: 0.1,
+      ...flowSpring
+      // ...backEasing,
+      // duration: 1
+    }
+    // "--y": "20px",
+    // "--rotate": "-10deg",
+    // "--rotateX": "-20deg",
+    // "--rotateY": "20deg",
+    // "--z": "-160px"
   },
   second: {
-    opacity: 0.2,
-    "--y": "20px",
-    "--rotate": "-10deg",
-    "--rotateX": "-20deg",
-    "--rotateY": "20deg",
-    "--z": "-160px"
+    opacity: 0,
+    "--y": "-120px",
+    "--rotateX": "80deg",
+    "--x": "10px",
+    "--z": "50px",
+    transition: {
+      ...flowSpring
+    }
   },
   third: {
-    opacity: 1,
-    "--y": "20px",
-    "--rotate": "-10deg",
-    "--rotateX": "-20deg",
-    "--rotateY": "20deg",
-    "--z": "-160px"
+    opacity: 0,
+    "--y": "-120px",
+    "--rotateX": "80deg",
+    "--x": "10px",
+    "--z": "50px"
   },
   fourth: {
-    opacity: 0.15,
-    "--y": "20px",
-    "--rotate": "-10deg",
-    "--rotateX": "-20deg",
-    "--rotateY": "20deg",
-    "--z": "-160px"
+    opacity: 0,
+    "--y": "-120px",
+    "--rotateX": "80deg",
+    "--x": "10px",
+    "--z": "50px"
   },
   last: {
     opacity: 0,
-    "--y": "20px",
-    "--rotate": "-10deg",
-    "--rotateX": "-20deg",
-    "--rotateY": "20deg",
-    "--z": "-160px"
+    "--y": "-120px",
+    "--rotateX": "80deg",
+    "--x": "10px",
+    "--z": "50px"
   }
+  // second: {
+  //   opacity: 0.2,
+  //   "--y": "20px",
+  //   "--rotate": "-10deg",
+  //   "--rotateX": "-20deg",
+  //   "--rotateY": "20deg",
+  //   "--z": "-160px"
+  // },
+  // third: {
+  //   opacity: 1,
+  //   "--y": "20px",
+  //   "--rotate": "-10deg",
+  //   "--rotateX": "-20deg",
+  //   "--rotateY": "20deg",
+  //   "--z": "-160px"
+  // },
+  // fourth: {
+  //   opacity: 0.15,
+  //   "--y": "20px",
+  //   "--rotate": "-10deg",
+  //   "--rotateX": "-20deg",
+  //   "--rotateY": "20deg",
+  //   "--z": "-160px"
+  // },
+  // last: {
+  //   opacity: 0,
+  //   "--y": "20px",
+  //   "--rotate": "-10deg",
+  //   "--rotateX": "-20deg",
+  //   "--rotateY": "20deg",
+  //   "--z": "-160px"
+  // }
 };
 
 const thirdVariants = {
@@ -289,105 +377,394 @@ const thirdVariants = {
     "--y": "80px"
   },
   index: {
-    "--y": "30px",
+    "--y": "50px",
     "--rotateX": "20deg",
     "--rotateY": "20deg"
   },
   first: {
-    opacity: 0.1,
-    "--y": "50px",
-    "--rotateX": "30deg",
-    "--rotateY": "50deg",
-    "--z": "100px"
+    opacity: 0.25,
+    "--y": "-110px",
+    "--rotateX": "20deg",
+    "--rotateY": "20deg",
+    "--rotate": "10deg",
+    transition: {
+      delay: 0.2,
+      ...flowSpring
+      // ...backEasing,
+      // duration: 1
+    }
+    // "--y": "50px",
+    // "--rotateX": "30deg",
+    // "--rotateY": "50deg",
+    // "--z": "100px"
   },
   second: {
-    opacity: 1,
-    "--x": "100px",
-    "--y": "-40px",
-    "--rotateX": "-10deg",
-    "--rotateY": "70deg",
-    "--z": "100px"
+    opacity: 0.1,
+    "--y": "-180px",
+    "--rotateX": "50deg",
+    "--rotateY": "20deg",
+    "--rotate": "10deg",
+    transition: {
+      delay: 0.1,
+      ...flowSpring
+    }
   },
   third: {
-    opacity: 0.2,
-    "--x": "100px",
-    "--y": "-40px",
-    "--rotateX": "-10deg",
-    "--rotateY": "90deg",
-    "--z": "100px"
+    opacity: 0,
+    "--y": "-430px",
+    "--rotateX": "80deg",
+    "--rotateY": "20deg",
+    "--rotate": "10deg",
+    transition: {
+      delay: 0.2,
+      ...flowSpring
+    }
   },
   fourth: {
-    opacity: 0.25,
-    "--x": "-170px",
-    "--y": "-40px",
-    "--rotateX": "-20deg",
-    "--rotateY": "120deg",
-    "--z": "100px"
+    opacity: 0,
+    "--y": "-180px",
+    "--rotateX": "80deg",
+    "--rotateY": "20deg",
+    "--rotate": "10deg"
   },
   last: {
     opacity: 0,
-    "--x": "-170px",
-    "--y": "-40px",
-    "--rotateX": "-20deg",
-    "--rotateY": "120deg",
-    "--z": "100px"
+    "--y": "-180px",
+    "--rotateX": "80deg",
+    "--rotateY": "20deg",
+    "--rotate": "10deg"
   }
+  // third: {
+  //   opacity: 0.2,
+  //   "--x": "100px",
+  //   "--y": "-40px",
+  //   "--rotateX": "-10deg",
+  //   "--rotateY": "90deg",
+  //   "--z": "100px"
+  // },
+  // fourth: {
+  //   opacity: 0.25,
+  //   "--x": "-170px",
+  //   "--y": "-40px",
+  //   "--rotateX": "-20deg",
+  //   "--rotateY": "120deg",
+  //   "--z": "100px"
+  // },
+  // last: {
+  //   opacity: 0,
+  //   "--x": "-170px",
+  //   "--y": "-40px",
+  //   "--rotateX": "-20deg",
+  //   "--rotateY": "120deg",
+  //   "--z": "100px"
+  // }
 };
 
 const fourthVariants = {
   initial: {
-    "--y": "30px"
+    "--y": "60px"
   },
   index: {
-    "--y": "0px",
+    "--y": "30px",
+    // "--x": "0px",
     "--rotate": "20deg",
     "--rotateX": "20deg",
     "--rotateY": "-10deg"
   },
   first: {
     opacity: 0.2,
-    "--z": "0px",
-    "--x": "-10px",
-    "--y": "-20px",
+    "--y": "-100px",
     "--rotate": "20deg",
-    "--rotateX": "-50deg",
-    "--rotateY": "-30deg"
+    "--rotateX": "20deg",
+    "--rotateY": "-10deg",
+    transition: {
+      delay: 0.3,
+      ...flowSpring
+      // ...backEasing,
+      // duration: 1
+    }
+    // "--z": "0px",
+    // "--x": "-10px",
+    // "--y": "-20px",
+    // "--rotate": "20deg",
+    // "--rotateX": "-50deg",
+    // "--rotateY": "-30deg"
   },
   second: {
     opacity: 0.15,
-    "--z": "0px",
-    "--x": "-10px",
-    "--y": "-20px",
+    // "--z": "0px",
+    "--y": "-200px",
     "--rotate": "20deg",
-    "--rotateX": "-50deg",
-    "--rotateY": "-30deg"
+    "--rotateX": "20deg",
+    "--rotateY": "-10deg",
+    transition: {
+      delay: 0.2,
+      ...flowSpring
+    }
   },
   third: {
-    opacity: 0.1,
-    "--z": "-190px",
-    "--x": "80px",
-    "--y": "150px",
-    "--rotate": "-20deg",
-    "--rotateX": "-30deg",
-    "--rotateY": "20deg"
+    opacity: 0.15,
+    "--y": "-470px",
+    "--rotate": "20deg",
+    "--rotateX": "40deg",
+    "--rotateY": "-10deg",
+    transition: {
+      delay: 0.3,
+      ...flowSpring
+    }
   },
   fourth: {
-    opacity: 1,
-    "--z": "-190px",
-    "--x": "80px",
-    "--y": "-10px",
-    "--rotate": "-20deg",
-    "--rotateX": "-30deg",
-    "--rotateY": "20deg"
+    opacity: 0,
+    "--y": "-500px",
+    "--rotate": "20deg",
+    "--rotateX": "80deg",
+    "--rotateY": "-10deg",
+    transition: {
+      ...flowSpring
+    }
   },
   last: {
     opacity: 0,
-    "--z": "-190px",
-    "--x": "80px",
-    "--y": "-10px",
+    "--y": "-470px",
+    "--rotate": "20deg",
+    "--rotateX": "80deg",
+    "--rotateY": "-10deg"
+  }
+  // third: {
+  //   opacity: 0.1,
+  //   "--z": "-190px",
+  //   "--x": "80px",
+  //   "--y": "150px",
+  //   "--rotate": "-20deg",
+  //   "--rotateX": "-30deg",
+  //   "--rotateY": "20deg"
+  // },
+  // fourth: {
+  //   opacity: 1,
+  //   "--z": "-190px",
+  //   "--x": "80px",
+  //   "--y": "-10px",
+  //   "--rotate": "-20deg",
+  //   "--rotateX": "-30deg",
+  //   "--rotateY": "20deg"
+  // },
+  // last: {
+  //   opacity: 0,
+  //   "--z": "-190px",
+  //   "--x": "80px",
+  //   "--y": "-10px",
+  //   "--rotate": "-20deg",
+  //   "--rotateX": "-30deg",
+  //   "--rotateY": "20deg"
+  // }
+};
+
+const fifthVariants = {
+  initial: {
+    opacity: 0,
+    "--rotate": "-10deg",
+    "--rotateX": "-80deg",
+    "--y": "100px"
+  },
+  index: {
+    opacity: 0,
+    "--rotate": "-10deg",
+    "--rotateX": "-80deg",
+    "--y": "100px"
+  },
+  first: {
+    opacity: 1,
+    "--rotateX": "0deg",
+    "--y": "-120px",
+    transition: {
+      delay: 0.4,
+      ...flowSpring
+    }
+  },
+  second: {
+    opacity: 0.2,
+    "--rotateX": "0deg",
+    "--y": "-200px",
+    transition: {
+      delay: 0.3,
+      ...flowSpring
+    }
+  },
+  third: {
+    opacity: 0.2,
+    "--rotateX": "0deg",
+    "--y": "-460px",
+    transition: {
+      delay: 0.4,
+      ...flowSpring
+    }
+  },
+  fourth: {
+    opacity: 0.2,
+    "--rotateX": "0deg",
     "--rotate": "-20deg",
-    "--rotateX": "-30deg",
-    "--rotateY": "20deg"
+    "--y": "-610px",
+    transition: {
+      delay: 0.1,
+      ...flowSpring
+    }
+  },
+  last: {
+    opacity: 0,
+    "--rotateX": "0deg",
+    "--rotateY": "70deg",
+    "--rotate": "70deg",
+    "--y": "-100px"
+  }
+};
+
+const sixthVariants = {
+  initial: {
+    opacity: 0,
+    "--rotateX": "-90deg"
+    // "--y": "50px"
+  },
+  index: {
+    opacity: 0,
+    "--rotateX": "-90deg"
+    // "--y": "50px"
+  },
+  first: {
+    opacity: 0,
+    "--rotateX": "-90deg"
+    // "--y": "50px"
+  },
+  second: {
+    opacity: 1,
+    "--rotateX": "-20deg",
+    "--y": "-200px",
+    transition: {
+      delay: 0.4,
+      ...flowSpring
+    }
+  },
+  third: {
+    opacity: 0.4,
+    "--rotateX": "30deg",
+    "--y": "-450px",
+    transition: {
+      delay: 0.5,
+      ...flowSpring
+    }
+  },
+  fourth: {
+    opacity: 0.4,
+    "--rotateX": "30deg",
+    "--rotateY": "30deg",
+    "--y": "-500px",
+    transition: {
+      delay: 0.2,
+      ...flowSpring
+    }
+  },
+  last: {
+    opacity: 0,
+    "--rotateX": "30deg",
+    "--rotate": "-50deg",
+    "--rotateY": "-90deg",
+    "--y": "0px"
+  }
+};
+
+const seventhVariants = {
+  initial: {
+    opacity: 0,
+    "--rotateX": "-90deg",
+    "--y": "30px",
+    "--z": "-10px"
+  },
+  index: {
+    opacity: 0,
+    "--rotateX": "-90deg",
+    "--y": "30px",
+    "--z": "-10px"
+  },
+  first: {
+    opacity: 0,
+    "--rotateX": "-90deg",
+    "--y": "30px",
+    "--z": "-10px"
+  },
+  second: {
+    opacity: 0,
+    "--rotateX": "-90deg",
+    "--y": "30px",
+    "--z": "-10px"
+  },
+  third: {
+    opacity: 1,
+    "--rotateX": "-20deg",
+    "--y": "-330px",
+    "--z": "50px",
+    transition: {
+      delay: 0.6,
+      ...flowSpring
+    }
+  },
+  fourth: {
+    opacity: 0.1,
+    "--rotateX": "40deg",
+    "--rotate": "0deg",
+    "--y": "-490px",
+    "--z": "50px",
+    transition: {
+      delay: 0.3,
+      ...flowSpring
+    }
+  },
+  last: {
+    opacity: 0,
+    "--rotateX": "40deg",
+    "--rotate": "-60deg",
+    "--y": "-40px",
+    "--z": "50px"
+  }
+};
+const eighthVariants = {
+  initial: {
+    opacity: 0,
+    "--rotateX": "-80deg"
+    // "--y": "90px"
+  },
+  index: {
+    opacity: 0,
+    "--rotateX": "-80deg"
+    // "--y": "90px"
+  },
+  first: {
+    opacity: 0,
+    "--rotateX": "-80deg"
+    // "--y": "90px"
+  },
+  second: {
+    opacity: 0,
+    "--rotateX": "-80deg"
+    // "--y": "90px"
+  },
+  third: {
+    opacity: 0,
+    "--rotateX": "-80deg"
+    // "--y": "90px"
+  },
+  fourth: {
+    opacity: 1,
+    "--rotateX": "0deg",
+    "--y": "-350px",
+    transition: {
+      delay: 0.3,
+      ...flowSpring
+    }
+  },
+  last: {
+    opacity: 0,
+    "--rotate": "50deg",
+    "--rotateX": "0deg",
+    "--y": "-20px"
   }
 };
 
@@ -445,6 +822,10 @@ function Cta(props) {
   );
 }
 
+// if (typeof window !== "undefined") {
+//   Splitting({ target: "[data-splitting]", by: "chars" });
+// }
+
 export default function App() {
   const [state, setState] = useState("index");
   const states = ["index", "first", "second", "third", "fourth", "last"];
@@ -466,6 +847,13 @@ export default function App() {
       setState(states[index - 1]);
     }
   }
+
+  useEffect(() => {
+    // if (typeof window !== "undefined") Splitting();
+    if (typeof window !== "undefined") {
+      Splitting({ target: "[data-splitting]", by: "chars" });
+    }
+  }, []);
 
   return (
     <>
@@ -545,12 +933,91 @@ export default function App() {
               <Chip className="round second" variants={secondVariants} />
               <Chip className="arrow third" variants={thirdVariants} />
               <Chip className="square fourth" variants={fourthVariants} />
+              <Chip className="round fifth" variants={fifthVariants} />
+              <Chip className="round sixth" variants={sixthVariants} />
+              <Chip className="square seventh" variants={seventhVariants} />
+              <Chip className="square eighth" variants={eighthVariants} />
             </motion.div>
             <motion.div
               className="gradientDim bottom"
               variants={gradientDimVariants}
-              animate={state === "index" ? "show" : "hide"}
+              animate={state === "last" ? "hide" : "show"}
             />
+          </motion.div>
+          <motion.div
+            data-splitting
+            className={`title index ${state === "index" ? "current" : "after"}`}
+          >
+            새로운 은행을
+            <br />
+            만날 순간
+          </motion.div>
+          <motion.div
+            data-splitting
+            className={`title first ${
+              state === "index"
+                ? "before"
+                : state === "first"
+                ? "current"
+                : "after"
+            }`}
+          >
+            하루만 두어도
+            <br />
+            2% 이자를 드려요
+          </motion.div>
+          <motion.div
+            data-splitting
+            className={`title second ${
+              state === "first"
+                ? "before"
+                : state === "second"
+                ? "current"
+                : "after"
+            }`}
+          >
+            바로 나오는
+            <br />내 대출 한도
+          </motion.div>
+          <motion.div
+            data-splitting
+            className={`title third ${
+              state === "second"
+                ? "before"
+                : state === "third"
+                ? "current"
+                : "after"
+            }`}
+          >
+            뭘 좋아할지 몰라서
+            <br />다 준비했어요
+          </motion.div>
+          <motion.div
+            data-splitting
+            className={`title fourth ${
+              state === "third"
+                ? "before"
+                : state === "fourth"
+                ? "current"
+                : "after"
+            }`}
+          >
+            OTP 필요 없이
+            <br />
+            카드 대면 인증 끝
+          </motion.div>
+          <motion.div
+            data-splitting
+            className={`title last ${
+              state === "fourth"
+                ? "before"
+                : state === "last"
+                ? "current"
+                : "after"
+            }`}
+          >
+            이런 은행이
+            <br />내 손 안에 들어왔어요
           </motion.div>
           <Cta
             onTap={onCtaTap}
